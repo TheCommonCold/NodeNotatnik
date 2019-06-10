@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    form(method="post" action='/users').note#input
+        input(type='text', name='login', value=user.login, hidden=true)
+        input(type="text", name='remove', value=-1, hidden=true)
+        input(type="text", name='note')
+        button(type=submit) Post a note
+
+    ul
+        each note, index in user.notes
+            li.note
+                div
+                    form(method="post" action='/users')
+                        input(type='text', name='login', value=user.login, hidden=true)
+                        input(type="text", name='remove', value=index, hidden=true)
+                        button(type=submit) Remove
+                div
+                    p #{note.date}
+                div
+                    p #{note.text}
